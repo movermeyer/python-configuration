@@ -75,3 +75,13 @@ def test_separator():  # type: ignore
         python_config_2, prefix="CONFIG", separator="__", lowercase_keys=True
     )
     assert cfg == config_from_dict(DICT, lowercase_keys=True)
+
+
+def test_dotted():  # type: ignore
+    from . import python_config_3
+
+    cfg = config_from_python(
+        python_config_3, prefix="", separator=".", lowercase_keys=True
+    )
+
+    assert cfg.as_dict() == config_from_dict(DICT, lowercase_keys=True).as_dict()
